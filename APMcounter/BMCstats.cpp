@@ -15,8 +15,9 @@ Version:	0.1
 #include <iomanip>
 #include <locale>
 #include <sstream>
+#include <vector>
 
-#define MINIMUM_GAME_LENGTH_MINUTES 20
+#define MINIMUM_GAME_LENGTH_MINUTES 1
 using namespace std;
 
 void keyPressed(int key);
@@ -24,6 +25,9 @@ void updateScreen();
 void reset();
 int sumActions();
 void saveGame();
+bool loadConfig();
+map<string, string> createSettingsMap(vector<string> lines);
+vector<string> split(string str, char delimiter);
 
 map <int, short> currentState;
 map <int, short> previousState;
@@ -38,6 +42,7 @@ int secondsElapsed;
 
 int main() {
 	reset();
+	//loadConfig();
 
 	while (1) {
 		loopCount++;
@@ -270,4 +275,64 @@ void saveGame() {
 
 	outputFile.close();
 
+}
+
+bool loadConfig() {
+	ifstream config ("config.txt");
+	string line;
+
+	vector <string> lines;
+	map<string, string> settings;
+
+	if (config) {
+		config.open("config.txt");
+	}
+	//get lines from the config file
+	for (int i = 0; getline(config, line); i++) {
+		lines[i] = line;
+	}
+
+	settings = createSettingsMap(lines);
+	//print test:
+	cout << "Label: " << settings["Label"] << endl;
+	Sleep(5000);
+}
+
+map<string, string> createSettingsMap(vector<string> lines) {
+	vector <string> settingVector, settingLabels, settingValues;
+	map<string, string> settings;
+
+	for (int i = 0; i < lines.size(); i++) {
+		settingVector = split(lines[i], ':');
+
+
+		for (int i = 0; (i < settingVector.size()); i++) {
+			int j = 0;
+			if (i % 2 == 0) {
+				settingLabels[j] = settingVector[i];
+				j++;
+			} else {
+				settingValues[j] = settingVector[i];
+			}
+		}
+
+		//map the vectors together
+		for (int i = 0; i < settingLabels.size(); i++) {
+			settings[settingLabels[i]] = settingValues[i];
+		}
+	}
+	return settings;
+
+}
+
+vector<string> split(string str, char delimiter) {
+	vector<string> internal;
+	stringstream ss(str); // Turn the string into a stream.
+	string tok;
+
+	while (getline(ss, tok, delimiter)) {
+		internal.push_back(tok);
+	}
+
+	return internal;
 }
