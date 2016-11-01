@@ -1,0 +1,5 @@
+minGameLengthMinutes: 1
+lockedScreenBeep_Enabled: 1
+lockedScreenBeep_%Threshold: 30%
+lockedScreenBeep_TimeHeldSpaceDelay: 5
+lockedScreenBeep_FreqModulation: 0

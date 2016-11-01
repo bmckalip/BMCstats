@@ -1,0 +1,30 @@
+Timestamp:	Sun Nov 15 02:04:16 2015
+Game Length:	0:1:7
+Locked Screen:	0
+Left Click:		0
+Right Click:	0
+
+Q:		0
+W:		0
+E:		0
+R:		0
+D:		0
+F:		0
+1:		0
+2:		0
+3:		0
+4:		0
+5:		0
+6:		0
+7:		0
+A:		0
+S:		0
+Tab:	0
+F1:		0
+F2:		0
+F3:		0
+F4:		0
+F5:		0
+
+Total:	0
+APM:	0
